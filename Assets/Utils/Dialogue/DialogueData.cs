@@ -13,4 +13,5 @@ public class SentenceData
 {
     public string speaker;
     public string sentence;
+    public bool goOn = false;
 }

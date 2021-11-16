@@ -4,21 +4,8 @@ using UnityEngine;
 public class CutsManager : MonoBehaviour
 {
     public GameObject[] cuts;
-    public int cutIndex = 0;
-    public bool strict = true;
+    private int cutIndex = 0;
     private IEnumerator coroutine;
-
-    void Start()
-    {
-        if (strict)
-        {
-            cutIndex = 0;
-            for (int i = 0; i < cuts.Length; i++)
-            {
-                cuts[i].SetActive(i == 0);
-            }
-        }
-    }
 
     public void scheduleIncrement(float delay)
     {
