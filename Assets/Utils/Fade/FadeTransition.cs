@@ -44,7 +44,7 @@ public class FadeTransition : MonoBehaviour
         screen.color = new Color(0, 0, 0, opacity);
     }
 
-    public void SetSpeec(float newSpeed)
+    public void SetSpeed(float newSpeed)
     {
         anim.SetFloat("speed", newSpeed);
     }

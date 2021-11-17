@@ -4,7 +4,7 @@ using UnityEngine;
 public class CutsManager : MonoBehaviour
 {
     public GameObject[] cuts;
-    private int cutIndex = 0;
+    public int cutIndex = 0;
     private IEnumerator coroutine;
 
     public void scheduleIncrement(float delay)
@@ -15,7 +15,7 @@ public class CutsManager : MonoBehaviour
 
     public void incrementCut()
     {
-        if (cutIndex >= cuts.Length - 1)
+        if (cutIndex < cuts.Length - 1)
         {
             cuts[cutIndex].SetActive(false);
             cutIndex++;
