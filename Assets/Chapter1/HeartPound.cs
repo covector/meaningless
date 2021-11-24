@@ -19,8 +19,6 @@ public class HeartPound : MonoBehaviour
         {
             GetComponent<Animator>().speed = 2f;
             await Task.Delay(4000);
-            // start dialogue
-            await Task.Delay(500);
             FindObjectOfType<CutsManager>().incrementCut();
         }
     }

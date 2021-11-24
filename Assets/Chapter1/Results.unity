@@ -217,7 +217,7 @@ RectTransform:
   - {fileID: 1321864815}
   - {fileID: 631829980}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -325,7 +325,7 @@ Transform:
   m_LocalScale: {x: 10.87893, y: 10.87893, z: 10.87893}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &227812952
 MonoBehaviour:
@@ -405,7 +405,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335845560
 GameObject:
@@ -522,7 +522,7 @@ Transform:
   - {fileID: 1248434375}
   - {fileID: 1319187149}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &390850004
 MonoBehaviour:
@@ -705,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &631829980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -738,12 +738,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16387384aa8708419c0071eb3c09f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  charDelay: 0.08
-  maxChar: 400
+  charDelay: 80
   speakerText: {fileID: 562637270}
   sentenceText: {fileID: 1249380889}
   dialogueBox: {fileID: 1833234985}
+  arrowButton: {fileID: 2126456105}
+  dialogueInProgress: 0
+  speakingInProgress: 0
 --- !u!1 &742568370
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +827,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &829244998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 829245000}
+  - component: {fileID: 829244999}
+  m_Layer: 0
+  m_Name: stop_dozing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &829244999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829244998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6a811b29423424f9a92d595d73bae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &829245000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829244998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1135308870
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +985,7 @@ Transform:
   m_LocalScale: {x: 10.87893, y: 10.87893, z: 10.87893}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1248434374
 GameObject:
@@ -1353,7 +1397,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468608232
 GameObject:
@@ -1373,7 +1417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1468608233
 Animator:
   serializedVersion: 3
@@ -1456,7 +1500,7 @@ Transform:
   m_LocalScale: {x: 0.40443844, y: 0.40443844, z: 0.40443844}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1468608236
 MonoBehaviour:
@@ -1504,6 +1548,7 @@ MonoBehaviour:
   - {fileID: 227812948}
   - {fileID: 390850002}
   - {fileID: 1135308870}
+  - {fileID: 829244998}
   cutIndex: 0
 --- !u!4 &1672154685
 Transform:
@@ -1517,7 +1562,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716640704
 GameObject:
@@ -1701,7 +1746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1833234986
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1979,7 +2024,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 631829981}
         m_TargetAssemblyTypeName: Dialogue, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: EndDialogue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
