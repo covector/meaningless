@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,7 @@ public class FadeTransition : MonoBehaviour
     public float speed = 1f;
     private Animator anim;
     private Image screen;
-    private Action fadeInCallback;
-    private Action fadeOutCallback;
+    private bool inProgress = false;
     
     void Start()
     {
@@ -17,31 +17,26 @@ public class FadeTransition : MonoBehaviour
         anim.SetFloat("speed", speed);
     }
 
-    public void FadeIn(Action callback)
+    public async Task FadeIn()
     {
-        fadeInCallback = callback;
+        inProgress = true;
         anim.SetTrigger("in");
+        while (inProgress)
+        {
+            await Task.Delay(25);
+        }
+        screen.enabled = false;
     }
 
-    public void FadeIn()
+    public async Task FadeOut()
     {
-        FadeIn(delegate () {; });
-    }
-
-    public void FadeOut(Action callback)
-    {
-        fadeOutCallback = callback;
+        screen.enabled = true;
+        inProgress = true;
         anim.SetTrigger("out");
-    }
-
-    public void FadeOut()
-    {
-        FadeOut(delegate () {; });
-    }
-
-    public void SetOpacity(float opacity)
-    {
-        screen.color = new Color(0, 0, 0, opacity);
+        while (inProgress)
+        {
+            await Task.Delay(25);
+        }
     }
 
     public void SetSpeed(float newSpeed)
@@ -49,13 +44,8 @@ public class FadeTransition : MonoBehaviour
         anim.SetFloat("speed", newSpeed);
     }
 
-    protected void CallFadeOutCallback()
+    protected void AnimationEnd()
     {
-        fadeOutCallback();
-    }
-
-    protected void CallFadeInCallback()
-    {
-        fadeInCallback();
+        inProgress = false;
     }
 }

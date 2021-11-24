@@ -8,8 +8,8 @@ public class Dialogue : MonoBehaviour
     public DialogueData data;
     public float charDelay = 0.08f;
     public int maxChar = 400;
-    public TextMeshPro speakerText;
-    public TextMeshPro sentenceText;
+    public TextMeshProUGUI speakerText;
+    public TextMeshProUGUI sentenceText;
     public GameObject dialogueBox;
     private int dialogueIndex = -1;
     private bool dialogueInProgress = false;
@@ -56,5 +56,10 @@ public class Dialogue : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void Test()
+    {
+
     }
 }

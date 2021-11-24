@@ -1,25 +1,32 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class HeartPound : MonoBehaviour
 {
     public bool fast;
+    public AudioManager audioManager;
 
-    void Start()
+    async void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         if (!fast)
         {
-            FindObjectOfType<CutsManager>().scheduleIncrement(5f);
+            await FindObjectOfType<FadeTransition>().FadeIn();
+            await Task.Delay(5000);
+            FindObjectOfType<CutsManager>().incrementCut();
         } else
         {
-            StartCoroutine(DelayDialogue());
             GetComponent<Animator>().speed = 2f;
+            await Task.Delay(4000);
+            // start dialogue
+            await Task.Delay(500);
+            FindObjectOfType<CutsManager>().incrementCut();
         }
     }
 
-    IEnumerator DelayDialogue()
+    protected void PlayHeartBeat()
     {
-        yield return new WaitForSeconds(4f);
-        FindObjectOfType<CutsManager>().scheduleIncrement(1f);
+        audioManager.PlayAudio(0, 2);
     }
 }

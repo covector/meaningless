@@ -1,10 +1,14 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Title : MonoBehaviour
 {
-    void Start()
+    async void Start()
     {
-        FindObjectOfType<FadeTransition>().FadeIn();
-        FindObjectOfType<CutsManager>().scheduleIncrement(3f);
+        await FindObjectOfType<FadeTransition>().FadeIn();
+        await Task.Delay(3000);
+        await FindObjectOfType<FadeTransition>().FadeOut();
+        FindObjectOfType<CutsManager>().incrementCut();
     }
 }
