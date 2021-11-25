@@ -4,7 +4,7 @@ public class StopDozing : MonoBehaviour
 {
     async void Start()
     {
-        await FindObjectOfType<Dialogue>().StartDialogue("Speaker A", "¡§Hey, what score did you get?¡¨");
+        await FindObjectOfType<Dialogue>().StartDialogue("Paul", "..Hey.....Hey...");
         FindObjectOfType<CutsManager>().incrementCut();
     }
 }
