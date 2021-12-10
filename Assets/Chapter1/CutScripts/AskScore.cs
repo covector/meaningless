@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class AskScore : MonoBehaviour
@@ -7,17 +6,21 @@ public class AskScore : MonoBehaviour
     public Sprite personSpriteLeft;
     public SpriteRenderer personSpriteRenderer;
 
-    async void Start()
+    void Start()
     {
+        FindObjectOfType<BGMusicManager>().StopAudio();
         FindObjectOfType<Dialogue>().HideDialogue();
-        await Task.Delay(500);
-        await FindObjectOfType<Dialogue>().StartDialogue("Paul", "Hey, what score did you get?");
-        await Task.Delay(500);
-        await FindObjectOfType<Dialogue>().StartDialogue("Me", "I don't know. I haven't turned it over and looked yet.");
-        FindObjectOfType<Dialogue>().HideDialogue();
-        personSpriteRenderer.sprite = personSprite;
-        await Task.Delay(500);
-        FindObjectOfType<CutsManager>().incrementCut();
+        FindObjectOfType<CutsManager>().WaitForSeconds(0.5f)
+        .Then(() => FindObjectOfType<Dialogue>().StartDialogue("Paul", "Hey, what score did you get?"))
+        .Then(() => FindObjectOfType<CutsManager>().WaitForSeconds(0.5f))
+        .Then(() => FindObjectOfType<Dialogue>().StartDialogue("Me", "I don't know. I haven't turned it over and looked yet."))
+        .Then(() =>
+        {
+            FindObjectOfType<Dialogue>().HideDialogue();
+            personSpriteRenderer.sprite = personSprite;
+        })
+        .Then(() => FindObjectOfType<CutsManager>().WaitForSeconds(0.5f))
+        .Then(() => FindObjectOfType<CutsManager>().incrementCut());
     }
 
     protected void Turn()

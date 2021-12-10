@@ -1,7 +1,6 @@
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using RSG;
 
 public class FadeTransition : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class FadeTransition : MonoBehaviour
     private Animator anim;
     private Image screen;
     private bool inProgress = false;
+    private Promise curProm;
     
     void Start()
     {
@@ -17,35 +17,50 @@ public class FadeTransition : MonoBehaviour
         anim.SetFloat("speed", speed);
     }
 
-    public async Task FadeIn()
+    public IPromise FadeIn()
     {
-        inProgress = true;
-        anim.SetTrigger("in");
-        while (inProgress)
+        if (!inProgress)
         {
-            await Task.Delay(25);
+            inProgress = true;
+            curProm = new Promise();
+            anim.SetTrigger("in");
         }
-        screen.enabled = false;
+        return curProm;
     }
 
-    public async Task FadeOut()
+    protected void FadeInEnd()
     {
-        screen.enabled = true;
-        inProgress = true;
-        anim.SetTrigger("out");
-        while (inProgress)
+        screen.enabled = false;
+        inProgress = false;
+        if (curProm != null)
         {
-            await Task.Delay(25);
+            curProm.Resolve();
+        }
+    }
+
+    public IPromise FadeOut()
+    {
+        if (!inProgress)
+        {
+            screen.enabled = true;
+            inProgress = true;
+            curProm = new Promise();
+            anim.SetTrigger("out");
+        }
+        return curProm;
+    }
+
+    protected void FadeOutEnd()
+    {
+        inProgress = false;
+        if (curProm != null)
+        {
+            curProm.Resolve();
         }
     }
 
     public void SetSpeed(float newSpeed)
     {
         anim.SetFloat("speed", newSpeed);
-    }
-
-    protected void AnimationEnd()
-    {
-        inProgress = false;
     }
 }

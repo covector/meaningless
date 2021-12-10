@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class SoundFXManager : MonoBehaviour
 {
     public AudioClip[] clips;
     private AudioSource audioSource;
@@ -10,6 +10,11 @@ public class AudioManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     } 
+
+    public void SetVolume(float newVolume)
+    {
+        audioSource.volume = newVolume;
+    }
 
     public void PlayAudio(int clip)
     {
