@@ -5,7 +5,12 @@ using UnityEngine;
 public class CutsManager : MonoBehaviour
 {
     public GameObject[] cuts;
-    private int cutIndex = 0;
+    public int cutIndex = 0;
+
+    private void Start()
+    {
+        if (cuts.Length > 0) { cuts[0].SetActive(true); }
+    }
 
     public void incrementCut()
     {

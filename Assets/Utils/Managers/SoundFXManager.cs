@@ -25,10 +25,10 @@ public class SoundFXManager : MonoBehaviour
     public void PlayAudio(int clip, int amount)
     {
         audioSource.clip = clips[clip];
-        StartCoroutine(playAudioMultiple(amount));
+        StartCoroutine(PlayAudioMultiple(amount));
     }
 
-    IEnumerator playAudioMultiple(int amount)
+    IEnumerator PlayAudioMultiple(int amount)
     {
         for (int i = 0; i < amount; i++)
         {

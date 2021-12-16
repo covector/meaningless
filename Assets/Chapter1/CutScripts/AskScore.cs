@@ -6,9 +6,11 @@ public class AskScore : MonoBehaviour
     public Sprite personSpriteLeft;
     public SpriteRenderer personSpriteRenderer;
 
-    void Start()
+    void OnEnable()
     {
-        FindObjectOfType<BGMusicManager>().StopAudio();
+        FindObjectOfType<BGMusicManager>().StopAllCoroutines();
+        FindObjectOfType<BGMusicManager>().PlayAudio(2);
+        FindObjectOfType<BGMusicManager>().FadeInVolume(3f, 0.35f);
         FindObjectOfType<Dialogue>().HideDialogue();
         FindObjectOfType<CutsManager>().WaitForSeconds(0.5f)
         .Then(() => FindObjectOfType<Dialogue>().StartDialogue("Paul", "Hey, what score did you get?"))

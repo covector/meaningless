@@ -63,4 +63,13 @@ public class FadeTransition : MonoBehaviour
     {
         anim.SetFloat("speed", newSpeed);
     }
+
+    public void SetTransparency(bool transparent)
+    {
+        if (!inProgress)
+        {
+            curProm = null;
+            anim.SetTrigger(transparent ? "op_0" : "op_1");
+        }
+    }
 }

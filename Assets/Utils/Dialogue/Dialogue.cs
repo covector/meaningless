@@ -69,4 +69,12 @@ public class Dialogue : MonoBehaviour
             curProm.Resolve();
         }
     }
+
+    public void FullReset()
+    {
+        dialogueInProgress = false;
+        speakingInProgress = false;
+        StopAllCoroutines();
+        HideDialogue();
+    }
 }
