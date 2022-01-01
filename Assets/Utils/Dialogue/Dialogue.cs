@@ -12,12 +12,20 @@ public class Dialogue : MonoBehaviour
     public GameObject arrowButton;
     private bool dialogueInProgress = false;
     private bool speakingInProgress = false;
-    public SoundFXManager audioManager;
+    private SoundFXManager audioManager;
     private Promise curProm;
 
     private void Start()
     {
         audioManager = FindObjectOfType<SoundFXManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && dialogueInProgress)
+        {
+            EndDialogue();
+        }
     }
 
     public IPromise StartDialogue(string speaker, string sentence)
@@ -27,14 +35,24 @@ public class Dialogue : MonoBehaviour
             curProm = new Promise();
             dialogueInProgress = true;
             speakingInProgress = true;
-            dialogueBox.SetActive(true);
+            if (dialogueBox) {
+                dialogueBox.SetActive(true);
+            }
             arrowButton.SetActive(false);
-            speakerText.SetText(speaker);
+            if (speakerText)
+            {
+                speakerText.SetText(speaker);
+            }
             sentenceText.SetText(sentence);
-            audioManager.SetVolume(0.2f);
+            audioManager.SetVolume(0.1f);
             StartCoroutine(_StartDialogue(sentence));
         }
         return curProm;
+    }
+
+    public IPromise StartDialogue(string sentence)
+    {
+        return StartDialogue("", sentence);
     }
 
     IEnumerator _StartDialogue(string sentence)
@@ -43,7 +61,12 @@ public class Dialogue : MonoBehaviour
         for (int i = 0; i <= totalChar; i++)
         {
             sentenceText.maxVisibleCharacters = i;
-            audioManager.PlayAudio(1);
+            audioManager.PlayAudio("dialogue");
+            if (!speakingInProgress)
+            {
+                sentenceText.maxVisibleCharacters = totalChar;
+                break;
+            }
             yield return new WaitForSeconds(charDelay);
         }
         speakingInProgress = false;
@@ -54,7 +77,15 @@ public class Dialogue : MonoBehaviour
     {
         if (!dialogueInProgress)
         {
-            dialogueBox.SetActive(false);
+            if (dialogueBox)
+            {
+                dialogueBox.SetActive(false);
+            }
+            if (speakerText)
+            {
+                speakerText.SetText("");
+            }
+            sentenceText.SetText("");
             return true;
         }
         return false;
@@ -62,11 +93,17 @@ public class Dialogue : MonoBehaviour
 
     public void EndDialogue()
     {
-        if (!speakingInProgress)
+        if (dialogueInProgress)
         {
-            dialogueInProgress = false;
-            arrowButton.SetActive(false);
-            curProm.Resolve();
+            if (speakingInProgress)
+            {
+                speakingInProgress = false;
+            } else
+            {
+                dialogueInProgress = false;
+                arrowButton.SetActive(false);
+                curProm.Resolve();
+            }
         }
     }
 

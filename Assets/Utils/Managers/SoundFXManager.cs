@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundFXManager : MonoBehaviour
 {
+    public string[] names;
     public AudioClip[] clips;
     private AudioSource audioSource;
 
@@ -16,15 +19,16 @@ public class SoundFXManager : MonoBehaviour
         audioSource.volume = newVolume;
     }
 
-    public void PlayAudio(int clip)
+    public void PlayAudio(string clip)
     {
-        audioSource.clip = clips[clip];
+
+        audioSource.clip = clips[Array.IndexOf(names, clip)];
         audioSource.Play();
     }
 
-    public void PlayAudio(int clip, int amount)
+    public void PlayAudio(string clip, int amount)
     {
-        audioSource.clip = clips[clip];
+        audioSource.clip = clips[Array.IndexOf(names, clip)];
         StartCoroutine(PlayAudioMultiple(amount));
     }
 

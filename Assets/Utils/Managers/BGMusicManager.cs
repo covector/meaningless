@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BGMusicManager : MonoBehaviour
 {
+    public string[] names;
     public AudioClip[] clips;
-    public int clipInd;
     private AudioSource audioSource;
 
     private void Start()
     {
-        clipInd = -1;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -18,14 +19,10 @@ public class BGMusicManager : MonoBehaviour
         audioSource.volume = newVolume;
     }
 
-    public void PlayAudio(int clip)
+    public void PlayAudio(string clip)
     {
-        if (clipInd != clip)
-        {
-            clipInd = clip;
-            audioSource.clip = clips[clip];
-            audioSource.Play();
-        }
+        audioSource.clip = clips[Array.IndexOf(names, clip)];
+        audioSource.Play();
     }
 
     public void StopAudio()
@@ -64,5 +61,6 @@ public class BGMusicManager : MonoBehaviour
             audioSource.volume = volume * (1 - elapsed / seconds);
             yield return null;
         }
+        StopAudio();
     }
 }
