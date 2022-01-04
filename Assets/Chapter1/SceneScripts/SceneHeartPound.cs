@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HeartPound : MonoBehaviour
+public class SceneHeartPound : MonoBehaviour
 {
     public SoundFXManager audioManager;
 
