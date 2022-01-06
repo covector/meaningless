@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneScore : MonoBehaviour
 {
@@ -138,6 +139,21 @@ public class SceneScore : MonoBehaviour
 
     public void SawScore()
     {
-        thoughts.StartDialogue("He got 36 out of 100.");
+        thoughts.StartDialogue("He got 36 out of 100.")
+        .Then(() => thoughts.StartDialogue("Basically, he failed the exam."))
+        .Then(() => thoughts.StartDialogue("To put in perspective how absurd this is."))
+        .Then(() => thoughts.StartDialogue("The last time I saw a fail from someone was about 5 years ago."))
+        .Then(() => thoughts.StartDialogue("Really rarely does one fail."))
+        .Then(() => thoughts.StartDialogue("As long as you did all your revisions,"))
+        .Then(() => thoughts.StartDialogue("A passing grade was guaranteed."))
+        .Then(() => thoughts.StartDialogue("So what happened?"))
+        .Then(() => thoughts.StartDialogue("Did he do revision on the wrong materials?"))
+        .Then(() => thoughts.StartDialogue("Or was he extremely ill on the day of the exam?"))
+        .Then(() => thoughts.StartDialogue("I can¡¦t really think of other reasons."))
+        .Then(() => thoughts.StartDialogue("This just doesn¡¦t make any sense."))
+        .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(2f))
+        .Then(() => fade.FadeOut())
+        .Then(() => utils.WaitForSeconds(1.5f))
+        .Then(() => SceneManager.LoadScene(1));
     }
 }
