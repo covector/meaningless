@@ -24,9 +24,8 @@ public class SceneScore : MonoBehaviour
         title.SetActive(true);
         vignette.SetActive(true);
         fade.FadeIn()
-        .Then(() => FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.5f))
         .Then(() => FindObjectOfType<BGMusicManager>().PlayAudio("king"))
-        .Then(() => utils.WaitForSeconds(2f))
+        .Then(() => FindObjectOfType<BGMusicManager>().FadeInVolume(2f, 0.5f))
         .Then(() => fade.FadeOut())
         .Then(() => title.SetActive(false))
         .Then(() => fade.SetTransparency(true))
@@ -55,23 +54,21 @@ public class SceneScore : MonoBehaviour
         .Then(() => thoughts.HideDialogue())
         .Then(() => utils.WaitForSeconds(1f))
         .Then(() => thoughts.StartDialogue("Right?"))
-        .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(2f))
         .Then(() => fade.FadeOut())
         .Then(() => thoughts.HideDialogue())
         .Then(() => vignette.SetActive(false))
         .Then(() => fade.SetTransparency(true))
+        .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(2f))
         .Then(() => WokeUp());
     }
 
     void WokeUp()
     {
-        utils.WaitForSeconds(2.5f)
-        .Then(() => dialogue.StartDialogue("Paul", "\"...Hey.........Hey.......\""))
+        dialogue.StartDialogue("Paul", "\"...Hey.........Hey.......\"")
         .Then(() => dialogue.HideDialogue())
-        .Then(() => FindObjectOfType<BGMusicManager>().PlayAudio("cherrytree"))
-        .Then(() => FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.5f))
         .Then(() => classroom.SetActive(true))
-        .Then(() => utils.WaitForSeconds(0.7f))
+        .Then(() => FindObjectOfType<BGMusicManager>().PlayAudio("cherrytree"))
+        .Then(() => FindObjectOfType<BGMusicManager>().FadeInVolume(1f, 0.5f))
         .Then(() => headSprite.Change(2))
         .Then(() => dialogue.StartDialogue("Me", "\"What?\""))
         .Then(() => dialogue.StartDialogue("Paul", "\"What score did you get in the midterm exam?\""))
@@ -126,12 +123,14 @@ public class SceneScore : MonoBehaviour
         .Then(() => headSprite.Change(3))
         .Then(() => classroom.GetComponent<Animator>().SetTrigger("pan"))
         .Then(() => dialogue.StartDialogue("Me", "\"Oh yea, how about you, Sean?\""))
-        .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(1.5f))
+        .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(0.5f))
         .Then(() => dialogue.StartDialogue("Me", "\"What score did yo-\""))
         .Then(() => dialogue.HideDialogue())
         .Then(() => FindObjectOfType<BGMusicManager>().PlayAudio("king"))
-        .Then(() => FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.5f))
-        .Then(() => fade.FadeOut())
+        .Then(() => {
+            FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.5f);
+            return fade.FadeOut();
+        })
         .Then(() => classroom.SetActive(false))
         .Then(() => fade.SetTransparency(true))
         .Then(() => saw.SetActive(true));
@@ -149,11 +148,10 @@ public class SceneScore : MonoBehaviour
         .Then(() => thoughts.StartDialogue("So what happened?"))
         .Then(() => thoughts.StartDialogue("Did he do revision on the wrong materials?"))
         .Then(() => thoughts.StartDialogue("Or was he extremely ill on the day of the exam?"))
-        .Then(() => thoughts.StartDialogue("I can¡¦t really think of other reasons."))
+        .Then(() => thoughts.StartDialogue("I can¡¦t really think of any other reason."))
         .Then(() => thoughts.StartDialogue("This just doesn¡¦t make any sense."))
-        .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(2f))
         .Then(() => fade.FadeOut())
-        .Then(() => utils.WaitForSeconds(1.5f))
+        .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(1.5f))
         .Then(() => SceneManager.LoadScene(1));
     }
 }

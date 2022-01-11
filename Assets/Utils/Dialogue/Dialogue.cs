@@ -22,7 +22,7 @@ public class Dialogue : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && dialogueInProgress)
+        if (Input.GetKeyUp(KeyCode.Space) && dialogueInProgress)
         {
             EndDialogue();
         }

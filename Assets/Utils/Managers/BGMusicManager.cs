@@ -1,3 +1,4 @@
+using RSG;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ public class BGMusicManager : MonoBehaviour
     public string[] names;
     public AudioClip[] clips;
     private AudioSource audioSource;
+    private Promise curInProm;
+    private Promise curOutProm;
 
     private void Start()
     {
@@ -30,14 +33,18 @@ public class BGMusicManager : MonoBehaviour
         audioSource.Stop();
     }
 
-    public void FadeInVolume(float seconds, float volume)
+    public IPromise FadeInVolume(float seconds, float volume)
     {
+        curInProm = new Promise();
         StartCoroutine(_FadeInVolume(seconds, volume));
+        return curInProm;
     }
 
-    public void FadeOutVolume(float seconds)
+    public IPromise FadeOutVolume(float seconds)
     {
+        curOutProm = new Promise();
         StartCoroutine(_FadeOutVolume(seconds));
+        return curOutProm;
     }
 
     IEnumerator _FadeInVolume(float seconds, float volume)
@@ -49,6 +56,7 @@ public class BGMusicManager : MonoBehaviour
             audioSource.volume = volume * elapsed / seconds;
             yield return null;
         }
+        curInProm.Resolve();
     }
 
     IEnumerator _FadeOutVolume(float seconds)
@@ -62,5 +70,6 @@ public class BGMusicManager : MonoBehaviour
             yield return null;
         }
         StopAudio();
+        curOutProm.Resolve();
     }
 }
