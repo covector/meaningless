@@ -115,7 +115,12 @@ public class SceneWalk : MonoBehaviour
         .Then(() =>
         {
             dialogue.HideDialogue();
-            return FindObjectOfType<BGMusicManager>().FadeOutVolume(2f);
+            FindObjectOfType<BGMusicManager>().FadeOutVolume(2f)
+            .Then(() =>
+            {
+                FindObjectOfType<BGMusicManager>().PlayAudio("dream");
+                return FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.3f);
+            });
         })
         .Then(() =>
         {
@@ -125,8 +130,6 @@ public class SceneWalk : MonoBehaviour
             }
             sean.SetWalk(false);
             StartCoroutine(StopMe());
-            FindObjectOfType<BGMusicManager>().PlayAudio("dream");
-            FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.3f);
             return dialogue.StartDialogue("Sean", "\"So be it.\"");
         })
         .Then(() => dialogue.StartDialogue("Me", "\"Huh? What do you mean? Are you crazy?\""))
@@ -134,6 +137,8 @@ public class SceneWalk : MonoBehaviour
         .Then(() => dialogue.StartDialogue("Me", "\"...\""))
         .Then(() => fade.FadeOut())
         .Then(() => {
+            dialogue.HideDialogue();
+            walk.SetActive(false);
             cinematic.SetActive(true);
             return fade.FadeIn();
         })
@@ -156,7 +161,10 @@ public class SceneWalk : MonoBehaviour
         .Then(() => thoughts.StartDialogue("\"What is the point of living?\""))
         .Then(() => thoughts.StartDialogue("He said with a smile on his face."))
         .Then(() => thoughts.StartDialogue("A brave yet nihilistic smile."))
-        .Then(() => utils.WaitForSeconds(1f))
+        .Then(() => {
+            thoughts.HideDialogue();
+            return utils.WaitForSeconds(2f);
+        })
         .Then(() => thoughts.StartDialogue("The next day Sean dropped out of school."))
         .Then(() => thoughts.StartDialogue("I have never seen him ever since then."))
         .Then(() => { FindObjectOfType<BGMusicManager>().FadeOutVolume(2f); })
