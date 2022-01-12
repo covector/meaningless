@@ -7,7 +7,7 @@ public class SceneWalk : MonoBehaviour
     public Dialogue thoughts;
     public Dialogue dialogue;
     SceneUtils utils;
-    FadeTransition fade;
+    public FadeTransition fade;
     public GameObject walk;
     public InfSprite[] bgSprites;
     public WalkAnimation sean;
@@ -18,9 +18,11 @@ public class SceneWalk : MonoBehaviour
     void Start()
     {
         utils = GetComponent<SceneUtils>();
-        fade = FindObjectOfType<FadeTransition>();
-        FindObjectOfType<BGMusicManager>().PlayAudio("walk");
-        FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.5f)
+        utils.WaitForSeconds(1f)
+        .Then(() => {
+            FindObjectOfType<BGMusicManager>().PlayAudio("walk");
+            return FindObjectOfType<BGMusicManager>().FadeInVolume(1.5f, 0.5f);
+        })
         .Then(() => thoughts.StartDialogue("The rest of the day went by as normal."))
         .Then(() => thoughts.StartDialogue("As usual, I walked home with Sean after school."))
         .Then(() =>
@@ -93,7 +95,7 @@ public class SceneWalk : MonoBehaviour
         .Then(() => dialogue.StartDialogue("Sean", "\"Why do you have so much faith in this \'Essential Law\' thing anyway.\""))
         .Then(() => dialogue.StartDialogue("Sean", "\"As if you are worshipping a god or something.\""))
         .Then(() => dialogue.StartDialogue("Me", "\"...\""))
-        .Then(() => dialogue.StartDialogue("Me", "\"It doesn't matter whether you care about the \'Essential Law\' or not.\""))
+        .Then(() => dialogue.StartDialogue("Me", "\"It doesn't matter whether you care about it or not.\""))
         .Then(() => dialogue.StartDialogue("Me", "\"People chosen by the \'Essential Law\' have a much bigger advantage when it comes to employment.\""))
         .Then(() => dialogue.StartDialogue("Me", "\"Even if you are really good at music, you will still not likely get a well-paid job.\""))
         .Then(() => dialogue.StartDialogue("Me", "\"So what is your plan?\""))
@@ -167,10 +169,13 @@ public class SceneWalk : MonoBehaviour
         })
         .Then(() => thoughts.StartDialogue("The next day Sean dropped out of school."))
         .Then(() => thoughts.StartDialogue("I have never seen him ever since then."))
-        .Then(() => { FindObjectOfType<BGMusicManager>().FadeOutVolume(2f); })
+        .Then(() => {
+            thoughts.HideDialogue();
+            return FindObjectOfType<BGMusicManager>().FadeOutVolume(2f);
+        })
         .Then(() => thoughts.StartDialogue("END OF DEMO. BYE BITCH."))
         .Then(() => fade.FadeOut())
-        .Then(() => SceneManager.LoadScene(2));
+        .Then(() => SceneManager.LoadScene(1));
     }
 
     private IEnumerator StopMe()

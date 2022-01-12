@@ -2512,6 +2512,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8606421465955868505, guid: 38bb363fdb1128047b776bbeda57b91a, type: 3}
   m_PrefabInstance: {fileID: 1827561042}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1827561044 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8606421465955868509, guid: 38bb363fdb1128047b776bbeda57b91a, type: 3}
+  m_PrefabInstance: {fileID: 1827561042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9775d9f71831841bd73ef98df73c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1832608504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,7 +2534,6 @@ GameObject:
   - component: {fileID: 1832608507}
   - component: {fileID: 1832608506}
   - component: {fileID: 1832608505}
-  - component: {fileID: 1832608508}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2545,6 +2555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thoughts: {fileID: 645936437}
   dialogue: {fileID: 1593163264}
+  fade: {fileID: 1827561044}
   walk: {fileID: 1090563950}
   bgSprites:
   - {fileID: 1570822317}
@@ -2584,19 +2595,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1832608508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832608504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d943ce2244ac5334aa3c8f9a1d2f59e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scale: 10
 --- !u!1 &1861602766
 GameObject:
   m_ObjectHideFlags: 0

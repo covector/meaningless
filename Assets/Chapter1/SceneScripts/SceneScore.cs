@@ -15,15 +15,17 @@ public class SceneScore : MonoBehaviour
     public SpriteChanger bodySprite;
     public SpriteChanger envelopeSprite;
     SceneUtils utils;
-    FadeTransition fade;
+    public FadeTransition fade;
 
     void Start()
     {
         utils = GetComponent<SceneUtils>();
-        fade = FindObjectOfType<FadeTransition>();
-        title.SetActive(true);
-        vignette.SetActive(true);
-        fade.FadeIn()
+        utils.WaitForSeconds(1f)
+        .Then(() => {
+            title.SetActive(true);
+            vignette.SetActive(true);
+            return fade.FadeIn();
+        })
         .Then(() => FindObjectOfType<BGMusicManager>().PlayAudio("king"))
         .Then(() => FindObjectOfType<BGMusicManager>().FadeInVolume(2f, 0.5f))
         .Then(() => fade.FadeOut())
@@ -141,17 +143,17 @@ public class SceneScore : MonoBehaviour
         thoughts.StartDialogue("He got 36 out of 100.")
         .Then(() => thoughts.StartDialogue("Basically, he failed the exam."))
         .Then(() => thoughts.StartDialogue("To put in perspective how absurd this is."))
-        .Then(() => thoughts.StartDialogue("The last time I saw a fail from someone was about 5 years ago."))
+        .Then(() => thoughts.StartDialogue("The last time I saw a fail from someone was more than 5 years ago."))
         .Then(() => thoughts.StartDialogue("Really rarely does one fail."))
-        .Then(() => thoughts.StartDialogue("As long as you did all your revisions,"))
+        .Then(() => thoughts.StartDialogue("As long as you did all your revision,"))
         .Then(() => thoughts.StartDialogue("A passing grade was guaranteed."))
         .Then(() => thoughts.StartDialogue("So what happened?"))
-        .Then(() => thoughts.StartDialogue("Did he do revision on the wrong materials?"))
+        .Then(() => thoughts.StartDialogue("Did he do his revision on the wrong materials?"))
         .Then(() => thoughts.StartDialogue("Or was he extremely ill on the day of the exam?"))
         .Then(() => thoughts.StartDialogue("I can¡¦t really think of any other reason."))
         .Then(() => thoughts.StartDialogue("This just doesn¡¦t make any sense."))
         .Then(() => fade.FadeOut())
         .Then(() => FindObjectOfType<BGMusicManager>().FadeOutVolume(1.5f))
-        .Then(() => SceneManager.LoadScene(1));
+        .Then(() => SceneManager.LoadScene(3));
     }
 }
