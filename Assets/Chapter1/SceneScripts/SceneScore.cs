@@ -21,7 +21,8 @@ public class SceneScore : MonoBehaviour
     {
         utils = GetComponent<SceneUtils>();
         utils.WaitForSeconds(1f)
-        .Then(() => {
+        .Then(() =>
+        {
             title.SetActive(true);
             vignette.SetActive(true);
             return fade.FadeIn();
